@@ -1,0 +1,26 @@
+This app adds is made to be used in a distibuted enviroment that uses UF's to proxy data from other UF's towards an indexer:
+
++----+            +-----+
+| UF |   +----+   |     |
+| UF +->-+ UF +->-+ IDX |
+| UF |   +----+   |     |   +----+
++---+             | IDX |   | SH |
+                  |     +-<-+ SH |
++----+            | IDX |   | SH |
+| UF |   +----+   |     |   +----+
+| UF +->-+ UF +->-+ IDX |
+| UF |   +----+   |     |
++---+             +-----+
+
+This app will add a additional field "splunk_forwarder" to the data that is beeing send from the "intermediate" forwarder towards the indexers.
+It needs to be "split" into 3 parts.
+1) Intermediate forwarders: 
+	bin/set_forwarder_name.py
+	default/inputs.conf
+
+2) Indexers:
+	default/props.conf
+	default/transforms.conf
+
+3) Searchheads:
+	default/fields.conf
